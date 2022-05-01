@@ -18,7 +18,7 @@ contract Instance {
   string public theMethodName = 'The method name is method7123949.'; // returned from await contract.theMethodName() step 6
   bool private cleared = false; // set to false, must be true to clear instance 
 
-  // constructor
+  /// @notice password is assigned during deployment of contract in constructor 
   constructor(string memory _password) public {
     password = _password; // found using await contract.password() returns "ethernaut0" step 8
   }
