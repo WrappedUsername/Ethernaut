@@ -8,6 +8,9 @@ that contracts do not accidentally get deployed using, for example,
 an outdated compiler version that might introduce bugs that affect 
 the contract system negatively
 */
+
+/// @title Ethernaut introduction, and tutorial, interact with contract abi in console to beat level
+/// @author Alejandro Santander
 contract Instance {
 
   string public password; // set in memory with constructor 
