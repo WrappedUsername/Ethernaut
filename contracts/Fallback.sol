@@ -34,7 +34,7 @@ contract Fallback {
         _;
     }
 
-  /** @notice it may  be possible to brute force attack this function, but there is
+  /** @notice it may be possible to brute force attack this function, but there is
   an easier attack below */
   function contribute() public payable {
     require(msg.value < 0.001 ether);
