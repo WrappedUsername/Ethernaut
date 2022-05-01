@@ -25,7 +25,7 @@ contract Fallback {
     contributions[msg.sender] = 1000 * (1 ether); // address deploying contract is paid 1000 * (1 ether)
   }
 
-  // modifer used in function withdraw()
+  /// @notice modifer used in function withdraw()
   modifier onlyOwner {
         require( 
             msg.sender == owner,
@@ -34,6 +34,8 @@ contract Fallback {
         _;
     }
 
+  /** @notice it may  be possible to brute force attack this function, but there is
+  an easier attack below */
   function contribute() public payable {
     require(msg.value < 0.001 ether);
     contributions[msg.sender] += msg.value;
@@ -42,16 +44,23 @@ contract Fallback {
     }
   }
 
+  /// @notice used to check a players contribution 
   function getContribution() public view returns (uint) {
     return contributions[msg.sender];
   }
 
+  /** @notice could use a withdraw limit, but this allows player to exploit the 
+  vulnerability to withdraw all funds using await contract.withdraw() to complete this level! */
   function withdraw() public onlyOwner {
     owner.transfer(address(this).balance);
   }
 
+  /** @notice this fallback function receive() is the main attack target, in order to pass the 
+  require statement player must use function contribute() 1 wei will be enough, using the console
+  player calls await contract.contribute({value: 1}), then player calls await contract.sendTransaction({value: 1}),
+  player can verify ownership with await contract.owner(), player will now be able to withdraw all tokens */
   receive() external payable {
     require(msg.value > 0 && contributions[msg.sender] > 0);
-    owner = msg.sender;
+    owner = msg.sender; 
   }
 }
