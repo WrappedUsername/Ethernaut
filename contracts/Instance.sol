@@ -50,6 +50,6 @@ contract Instance {
   }
 
   function getCleared() public view returns (bool) { // click submit instance button step 10
-    return cleared; // checks if bool cleared is true in order to clear level instance 
+    return cleared; // checks if bool cleared is true in order to clear level instance. 
   }
 }
