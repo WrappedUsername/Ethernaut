@@ -1,5 +1,5 @@
-My completed Ethernaut challenges 
+#My completed Ethernaut challenges 
 
-All comments are my own.
+##All comments are my own.
 
-My research found this content from [D-squared](https://www.youtube.com/channel/UCVzcPkOAnbnzOpJzOCDNHwQ).
+My research found this content from [D squared](https://www.youtube.com/channel/UCVzcPkOAnbnzOpJzOCDNHwQ).
