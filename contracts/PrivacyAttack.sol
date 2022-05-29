@@ -18,7 +18,7 @@ contract PrivacyAttack {
     }
 
     /** @notice Player will call the unlock function on the victim contract and enter 
-    the bytes32 value found in storage slot 5 of the victim contract and convert it to 
+    the bytes32 value found in storage slot 5 of the victim contract, and convert it to 
     bytes16 to beat this level! See victim contract Privacy to see an explanation of 
     how to find the correct storage slot. */
     function unlock(bytes32 _slotValue) public {

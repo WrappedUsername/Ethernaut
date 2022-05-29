@@ -59,7 +59,7 @@ contract Privacy {
   for(var i = 0; i < 6; i++) {
     web3.eth.getStorageAt(contract.address, i, callbackFNConstructor(i))
   }
-  Player will call storage and the fifth storage slot is the third index for private state variable data, player will
+  Player will call storage and the fifth storage slot is the third index for private state variable data. Player will
   need to convert this unit32 value to unit16 to pass the require statement. See attack contract PrivacyAttack. */
   function unlock(bytes16 _key) public {
     require(_key == bytes16(data[2]));
