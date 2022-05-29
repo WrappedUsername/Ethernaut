@@ -1,6 +1,6 @@
-#My completed Ethernaut challenges 
+# My completed Ethernaut challenges 
 
-##All comments are my own.
+## All comments are my own, and intended to show my understanding of the subject.
 
 My research found this content from [D squared](https://www.youtube.com/channel/UCVzcPkOAnbnzOpJzOCDNHwQ)
-and [Web3 Blockchain Developer](https://www.youtube.com/c/Web3BlockchainDeveloper).
+and [Web3 Blockchain Developer](https://www.youtube.com/c/Web3BlockchainDeveloper) helpful.
