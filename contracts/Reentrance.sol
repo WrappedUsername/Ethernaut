@@ -16,7 +16,8 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 /// @author Alejandro Santander
 contract Reentrance {
   
-  // State variable of integers type, imported from openzeppelin.
+  /** @notice Using for directive, using imported SafeMath functions from openzeppelin
+  for unit256 to prevent overflow and underflow attacks. */
   using SafeMath for uint256;
   /* Public state variable of mappings type, assigned in function donate each address will
   show the amount of tokens they own as their balance. */
