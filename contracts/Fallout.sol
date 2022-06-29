@@ -15,11 +15,13 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 /// @author Alejandro Santander
 contract Fallout {
   
-  using SafeMath for uint256; // state variable of integers type, imported from openzeppelin
-  mapping (address => uint) allocations; /* state variable of mappings type, 
-  assigned in function allocate() */ 
-  address payable public owner; /* state variable of address type, 
-  assigned in flawed constructor below */
+  /** @notice Using for directive, using imported SafeMath functions from openzeppelin
+  for unit256 to prevent overflow and underflow attacks. */
+  using SafeMath for uint256; 
+  // State variable of mappings type, assigned in function allocate()
+  mapping (address => uint) allocations; 
+  // Public payable state variable of address value type, assigned in flawed constructor.
+  address payable public owner; /
 
 
   /** @notice this is the vulnerability to be exploited during the attack,

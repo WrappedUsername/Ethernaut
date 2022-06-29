@@ -16,7 +16,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v2.5.0/contr
 /// @author Kyle Riley
 contract CoinFlip {
 
-  // state variable of integers type, imported from openzeppelin
+  /** @notice Using for directive, using imported SafeMath functions from openzeppelin
+  for unit256 to prevent overflow and underflow attacks. */
   using SafeMath for uint256; 
   // state variable assigned in constructor 
   uint256 public consecutiveWins; 

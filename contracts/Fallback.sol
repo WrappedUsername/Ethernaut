@@ -15,10 +15,13 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 /// @author Alejandro Santander
 contract Fallback {
 
-  using SafeMath for uint256; // state variable of integers type, imported from openzeppelin
-  mapping(address => uint) public contributions; /* state variable of mappings type, 
-  assigned in function contribute() */ 
-  address payable public owner; // state variable of address type, assigned in constructor 
+  /** @notice Using for directive, using imported SafeMath functions from openzeppelin
+  for unit256 to prevent overflow and underflow attacks. */
+  using SafeMath for uint256; 
+  /// @notice Public state variable of mappings type, assigned in function contribute()
+  mapping(address => uint) public contributions;  
+  /// @notice Public payable state variable of address type, assigned in constructor.
+  address payable public owner;  
 
   constructor() public {
     owner = msg.sender; // address deploying contract is assigned as owner
