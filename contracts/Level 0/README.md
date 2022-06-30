@@ -2,7 +2,7 @@
 ## Level 0 Instance
 ### Code snippets may not be in order from smart contract see the contract files for unaltered code.
 
-```JavaScript
+```Solidity
 
 /// @title Ethernaut introduction, and tutorial, interact with contract abi in console to beat level
 /// @author Alejandro Santander
