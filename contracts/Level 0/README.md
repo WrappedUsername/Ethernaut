@@ -6,7 +6,7 @@
 
 /// @title Ethernaut introduction, and tutorial, interact with contract abi in console to beat level
 /// @author Alejandro Santander
-contract Instance
+contract Instance {
 
 /// @notice set in memory with constructor
   string public password;
@@ -66,5 +66,6 @@ contract Instance
   function getCleared() public view returns (bool) { 
     return cleared;  
   }
+}
 
 ```
