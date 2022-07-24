@@ -6,7 +6,7 @@ My research found this content from [D squared](https://www.youtube.com/channel/
 and [Web3 Blockchain Developer](https://www.youtube.com/c/Web3BlockchainDeveloper) helpful. I intend to create detailed 
 README files to further explain and demonstrate my understanding of the concepts that I am learning from this CTF. 
 Below is an example given.
-## I found this table helpful when learning about masking for Level 13. 
+## I found this table helpful when learning about bit masking for Level 13. 
 ## Base 16 Hexadecimal system - 1 byte = (8 bits) - 32 bytes = (256 bits)
 | 4 bit Binary Sequence | Hex Representation |
 | --- | --- |
