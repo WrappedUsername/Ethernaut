@@ -1,6 +1,6 @@
 # Level 13
 ## GatekeeperOne challenge
-## Base 16 Hexadecimal system
+## Base 16 Hexadecimal system - 1 byte = (8 bits) - 32 bytes = (256 bits)
 | 4 bit Binary Sequence | Hex Representation |
 | --- | --- |
 | 0000 | 0 |
