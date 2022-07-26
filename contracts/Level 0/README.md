@@ -1,6 +1,5 @@
-# Introduction to Ethernaut
-## Level 0 Instance
-### Code snippets may not be in order from smart contract see the contract files for unaltered code.
+# Introduction to Ethernaut - Level 0 - Instance
+## Code snippets are *not* in order from smart contract see the contract files for unaltered code.
 
 ```Solidity
 
