@@ -1,4 +1,4 @@
-# My completed Ethernaut challenges! 
+# My completed Ethernaut challenges. 
 
 ## All comments are my own, and intended to show my understanding of the subject.
 
