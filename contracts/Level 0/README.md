@@ -1,4 +1,6 @@
 # Introduction to Ethernaut - Level 0 - Instance
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Level0&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
+
 ## Code snippets are *not* in order from smart contract see the contract files for unaltered code.
 
 ```Solidity
