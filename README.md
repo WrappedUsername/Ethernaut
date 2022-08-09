@@ -1,4 +1,5 @@
-# My completed Ethernaut challenges. 
+# My completed Ethernaut challenges.
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Ethernaut&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
 ## All comments are my own, and intended to show my understanding of the subject.
 
