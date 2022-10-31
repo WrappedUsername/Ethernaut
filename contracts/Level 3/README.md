@@ -23,5 +23,33 @@ function flip(bool _guess) public returns (bool) {
     - the player calls this flip function 10 times in a row to win.
 
 ```Solidity
-  victimContract.flip(side);
+victimContract.flip(side);
 ```
+
+## 💥 The attack contract in detail:
+
+```yml
+The attack contract starts with importing the victim contract:
+```
+
+```Solidity
+// SPDX-License-Identifier: MIT
+// fixed pragma
+pragma solidity 0.5.0; 
+
+import "./CoinFlip.sol";
+// outdated import for SafeMath, pragma 0.8.0 has SafeMath included in version
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v2.5.0/contracts/math/SafeMath.sol";
+
+/// @title attack contract, calculates correct side 10 times in a row
+/// @author Web3 Blockchain Developer 
+contract CoinFlipAttack {
+    /** 
+    * @notice Using for directive, using imported SafeMath functions from openzeppelin,
+    * for unit256 to prevent overflow and underflow attacks. 
+    */
+    using SafeMath for uint256;
+```
+
+    
+    
