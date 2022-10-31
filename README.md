@@ -1,9 +1,7 @@
 # My completed Ethernaut challenges.
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Ethernaut&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
-## All comments are my own, and intended to show my understanding of the subject.
-
-My research found this content from [D squared](https://www.youtube.com/channel/UCVzcPkOAnbnzOpJzOCDNHwQ)
+My research has found this content from [D squared](https://www.youtube.com/channel/UCVzcPkOAnbnzOpJzOCDNHwQ)
 and [Web3 Blockchain Developer](https://www.youtube.com/c/Web3BlockchainDeveloper) helpful. I intend to create detailed 
 README files to further explain and demonstrate my understanding of the concepts that I am learning from this CTF. 
 Below is an example given.
