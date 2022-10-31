@@ -31,7 +31,7 @@ contract CoinFlip {
     consecutiveWins = 0;
   }
 
-  /// @notice function flip() exported to attack contract 
+  /// @notice The attack contract can use the same process as the victim contract to find the value for the flip.
   function flip(bool _guess) public returns (bool) {
     /** custom:notice blockhash and block.number are globally accessible variables available to everyone 
     this is the source of randomness and can be exploited in the attack to calculate the correct side of the coin flip
