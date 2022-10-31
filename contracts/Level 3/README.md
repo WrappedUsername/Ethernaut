@@ -51,7 +51,9 @@ contract CoinFlipAttack {
     */
     using SafeMath for uint256;
 ```
+- the public state variable victimContract references the victim contract as CoinFlip and will be assigned by the player when the attack contract is deployed using the constructor,
 - the attack contract also uses the state variable FACTOR from the victim contract,
+- the constructor receives the victim contract address from the player and references the victim contract with CoinFlip(_victimContractAddr), this address is assigned as the public state victimContract
 
 ```Solidity
 /// @notice public state variable assigned in constructor
