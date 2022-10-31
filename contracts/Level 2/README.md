@@ -1,4 +1,7 @@
 # Fallout challenge - Level 2
+
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Level2&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
+
 ```yml
 This challenge is more about best practices and how using a constructor is the best practice because:
 ```
