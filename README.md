@@ -1,6 +1,8 @@
 # My completed Ethernaut challenges.
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Ethernaut&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
+- 👀 Are you currently looking for a 🕸web3 blockchain job or other dev jobs? Check this out! [Developer Jobs Here!](https://app.usebraintrust.com/r/keefe1/)
+
 My research has found this content from [D squared](https://www.youtube.com/channel/UCVzcPkOAnbnzOpJzOCDNHwQ)
 and [Web3 Blockchain Developer](https://www.youtube.com/c/Web3BlockchainDeveloper) helpful. I intend to create detailed 
 README files to further explain and demonstrate my understanding of the concepts that I am learning from this CTF. 
