@@ -1,8 +1,8 @@
 # Telephone challenge - Level 4
 ```yml
-This smart contract has a vulnerability because:
+This smart contract has a vulnerability, it's use of tx.origin as authorization is a vulnerability because:
 ```
-- TODO tx.origin
+- if msg.sender is not tx.origin address _owner will equal owner.
 
 ```Solidity
 /** 
@@ -16,3 +16,14 @@ function changeOwner(address _owner) public {
   }
 }
 ```
+## 💥 The attack contract locked and loaded in REMIX IDE
+
+```yml
+Click hackContract button to initiate the attack:
+```
+
+- lower left of the image, under the Deployed Contracts section 
+
+<p align="left" >
+<img width="512" height="512" src="https://user-images.githubusercontent.com/104662990/199756044-16a699f2-5111-4dfe-a25f-fac81cd4b1ab.png">
+</P>
