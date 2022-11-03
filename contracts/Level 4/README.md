@@ -36,7 +36,7 @@ import "./Telephone.sol";
 contract TelephoneHack {
 ```
 
-- the constructor receives the victim contract address from the player and references the victim contract with Telephone(_address), this address is assigned as the public state victimContract,
+- the constructor receives the victim contract address from the player and references the victim contract with Telephone(_address), this address is assigned as the state variable telContract,
 
 ```Solidity
 /// @notice state variable assigned in constructor
