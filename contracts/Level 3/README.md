@@ -96,8 +96,16 @@ function flip() public returns(bool) {
 }
 
 ```
-## 💥 Fire away at that flip button, ten times!
-![Screen Shot 2022-10-31 at 1 05 02 PM](https://user-images.githubusercontent.com/104662990/199078205-0c19814b-c867-46bf-8b1e-9404585037af.png)
+## 💥 The attack contract locked and loaded in REMIX IDE
+
+```yml
+Fire away at that flip button, ten times:
+```
+- lower left of the image, under the Deployed Contracts section, orange button labeled flip.
+
+<p align="left" >
+<img width="506" height="512" src="https://user-images.githubusercontent.com/104662990/199078205-0c19814b-c867-46bf-8b1e-9404585037af.png">
+</P>
 
 
 
