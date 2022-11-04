@@ -20,3 +20,29 @@ function transfer(address _to, uint _value) public returns (bool) {
   return true;
 }
 ```
+
+🆘 The victim contract in detail
+
+```yml
+The victim contract should use the OpenZeppelin safeMath library:
+```
+- without the safeMath library overflow/underflow vulnerabilities remain, 
+
+```Solidity
+
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.6.0;
+
+/// @title Ethernaut challenge 5, hack contract steal as many tokens as you can 
+/// @author Alejandro Santander
+contract Token {
+  /* 
+  * state variable of mappings type, assigned in constructor each address will
+  * show the amount of tokens they own as their balance 
+  */
+  mapping(address => uint) balances;
+```
+
+
+
