@@ -21,7 +21,7 @@ function transfer(address _to, uint _value) public returns (bool) {
 }
 ```
 
-🆘 The victim contract in detail
+## 🆘 The victim contract in detail
 
 ```yml
 The victim contract should use the OpenZeppelin safeMath library:
@@ -43,6 +43,48 @@ contract Token {
   */
   mapping(address => uint) balances;
 ```
+
+- TODO
+
+```Solidity
+// public state variable of integers type, assigned in constructor
+    uint public totalSupply;
+
+    /** @notice address that deployed this contract assigns initial supply amount
+    as total supply and total supply is assigned to the balance of that address */
+    constructor(uint _initialSupply) public {
+        balances[msg.sender] = totalSupply = _initialSupply;
+    }
+ ```
+ 
+ - TODO
+
+```Solidity
+ /** @notice this transfer function has an underflow vulnerability that can be exploited, 
+    if the player sends 21 tokens to another address it will create an underflow because the player
+    only has 20 tokens and this underflow will leave the player with 2**256 - 1 tokens completing 
+    this level! */
+    function transfer(address _to, uint _value) public returns (bool) {
+        require(balances[msg.sender] - _value >= 0);
+        balances[msg.sender] -= _value;
+        balances[_to] += _value;
+        return true;
+    }
+
+    /// @notice returns balance of the address that calls this function
+    function balanceOf(address _owner) public view returns (uint balance) {
+        return balances[_owner];
+    }
+}
+```
+
+## 💥 The attack in browser developer tools console
+
+```yml
+The attack:
+```
+
+- TODO
 
 
 
