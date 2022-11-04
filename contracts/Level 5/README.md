@@ -15,7 +15,7 @@ This smart contract has a vulnerability, it does not account for overflow and un
 */
 function transfer(address _to, uint _value) public returns (bool) {
   require(balances[msg.sender] - _value >= 0);
-  balances[msg.sender] -= _value;
+  balances[msg.sender] -= _value; // <----- underflow here if 21 tokens sent
   balances[_to] += _value;
   return true;
 }
