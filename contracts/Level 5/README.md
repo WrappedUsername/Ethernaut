@@ -77,6 +77,12 @@ contract Token {
     }
 }
 ```
+## ⚠️ The vulnerability in detail
+
+```yml
+The vulnerability:
+```
+- TODO
 
 ## 💥 The attack in browser developer tools console
 
