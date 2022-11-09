@@ -82,7 +82,11 @@ contract Token {
 ```yml
 The vulnerability:
 ```
-- TODO
+- uint8 underflow
+
+| 0 | 0 | 0 | 0| 0| 0 | 0 | 0 |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 
 ## 💥 The attack in browser developer tools console
 
