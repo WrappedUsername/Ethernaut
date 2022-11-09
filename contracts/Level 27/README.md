@@ -182,8 +182,8 @@ The secret to the attack:
         } catch (bytes memory err) {
             if (keccak256(abi.encodeWithSignature("NotEnoughBalance()")) == keccak256(err)) {
                 // send the coins left
-                wallet.transferRemainder(msg.sender);
                 require(msg.value <= 10); /// @notice <-------- Add require statement here!
+                wallet.transferRemainder(msg.sender);
                 return false;
             }
         }
