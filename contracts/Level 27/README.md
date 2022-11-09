@@ -1,4 +1,4 @@
-# Good Samaritan challenge - Level 27 
+# Good Samaritan challenge - Level 27 - Work In Progress
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level27&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
