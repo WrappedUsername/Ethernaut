@@ -169,3 +169,28 @@ The secret to the attack:
         revert NotEnoughBalance();
     } 
 ```
+
+## 🩺 How can we fix this problem?
+
+- Simple, limit the amount that can be transfered with a simple require() statement.
+
+```Solidity
+ function requestDonation() public payable returns(bool enoughBalance){
+        // donate 10 coins to requester
+        try wallet.donate10(msg.sender) {
+            return true;
+        } catch (bytes memory err) {
+            if (keccak256(abi.encodeWithSignature("NotEnoughBalance()")) == keccak256(err)) {
+                // send the coins left
+                require(msg.value <= 10); /// @notice <-------- Add require statement here!
+                wallet.transferRemainder(msg.sender);
+                return false;
+            }
+        }
+    }
+
+```
+
+
+
+
