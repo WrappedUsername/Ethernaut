@@ -148,12 +148,24 @@ The attack contract:
 
 - TODO
 
+```Solidity
+
+```
+
 ## 💥 The attack in detail
 
 ```yml
-The attack:
+The secret to the attack:
 ```
 
-- TODO
+- The trick with using the notice to intiate the attack is to *not* revert the *entire* transaction with the error, so player will receive the coins, and after that revert NotEnoughBalance() 
 
-
+```Solidity
+/** 
+    * @notice When the attack contract is notified about receiving 10 
+    * tokens the attack contract reverts NotEnoughBalance() to the victim contract.
+    */
+    if (amount == 10) {
+        revert NotEnoughBalance();
+    } 
+```
