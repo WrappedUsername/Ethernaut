@@ -3,6 +3,8 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/utils/Address.sol";
 
+/// @title Ethernaut challenge 27, hack contract steal everything! 
+/// @author Eric Nordelo
 contract GoodSamaritan {
     Wallet public wallet;
     Coin public coin;
