@@ -86,6 +86,10 @@ constructor() {
         try wallet.donate10(msg.sender) {
             return true;
         } catch (bytes memory err) {
+            /** 
+            * @notice This if() statement is the main attack target specifically "NotEnoughBalance()",
+            * player must send this error to satisfy this if statement.
+            */
             if (keccak256(abi.encodeWithSignature("NotEnoughBalance()")) == keccak256(err)) {
                 // send the coins left
                 wallet.transferRemainder(msg.sender);
@@ -96,20 +100,37 @@ constructor() {
 }
  ```
  
- ## 🆘 The 
+ ## 🆘 The victim contract's dependency
  
- - TODO
+ - this code snippet below from the victim contract's dependency contract Coin.sol, shows that if a contract is receiving the tokens, the contract will calls the interface INotifyable to send the notice,
 
 ```Solidity
+ function transfer(address dest_, uint256 amount_) external {
+        uint256 currentBalance = balances[msg.sender];
 
+        // transfer only occurs if balance is enough
+        if(amount_ <= currentBalance) {
+            balances[msg.sender] -= amount_;
+            balances[dest_] += amount_;
+
+            if(dest_.isContract()) { // <--- Player is using an attack contract, so attack contract will receive notice
+                // notify contract 
+                INotifyable(dest_).notify(amount_);
+            }
+        } else {
+            revert InsufficientBalance(currentBalance, amount_);
+        }
+    }
 ```
 
-## 🆘
+## 🆘 The victim contract's dependency uses an interface 
 
-- TODO
+- The attack contract uses this notice to intiate the attack.
 
 ```Solidity
-
+interface INotifyable {
+    function notify(uint256 amount) external;
+}
 ```
 
 ## ⚠️ The vulnerability in detail
