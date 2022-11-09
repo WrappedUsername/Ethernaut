@@ -1,5 +1,7 @@
 # Good Samaritan challenge - Level 27 
 
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Level27&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
+
 ```yml
 This smart contract has a vulnerability, because:
 ```
