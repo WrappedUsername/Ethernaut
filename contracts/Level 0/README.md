@@ -38,23 +38,37 @@ Hopefully my notes throughout are clear and easy to follow:
 ## 🔍 While on our search for more clues
 
 ```yml
-According to the instructions on the Etharnaut DApp for this level we start with:
+According to the instructions on the Etharnaut DApp for this level we start with step 1:
 ```
-- a JavaScript async await TODO,
+- a [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) JavaScript await in console of the Ethernaut Instance web page in developer tools,
 
 ```JavaScript
 await contract.info()
 ```
-- here is the code snippet from the contract showing this function and what it returns TODO,
+- here is the code snippet from the contract showing this function and what it returns,
 
 ```Solidity
 
-  /// @notice returned from await contract.info() step 1
+  /// @notice step 1
   function info() public pure returns (string memory) {
     return 'You will find what you need in info1().'; 
   }
 ```
 
+~~~yml
+On to step 2:
+~~~
+
+- TODO
+
+```Solidity
+/// @notice returned from await contract.info1() step 2
+  function info1() public pure returns (string memory) {
+    return 'Try info2(), but with "hello" as a parameter.'; 
+  }
+```
+
+- TODO
 
 
 
