@@ -33,7 +33,7 @@ How to play:
 ```yml
 Hopefully my notes throughout are clear and easy to follow:
 ```
-- code snippets will help show what section of the cmart contract we need to focus our attention to,
+- code snippets will help show what section of the smart contract we need to focus our attention to,
 
 ## 🔍 While on our search for more clues
 
