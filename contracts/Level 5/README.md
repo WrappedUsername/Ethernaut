@@ -15,7 +15,7 @@ This smart contract has a vulnerability, it does not account for overflow and un
 */
 function transfer(address _to, uint _value) public returns (bool) {
   require(balances[msg.sender] - _value >= 0);
-  balances[msg.sender] -= _value; // <----- underflow here if 21 tokens transfered
+  balances[msg.sender] -= _value; // <----- overflow here if 21 tokens transfered
   balances[_to] += _value;
   return true;
 }
@@ -60,8 +60,8 @@ contract Token {
  - TODO
 
 ```Solidity
- /** @notice this transfer function has an underflow vulnerability that can be exploited, 
-    if the player sends 21 tokens to another address it will create an underflow because the player
+ /** @notice this transfer function has an overflow vulnerability that can be exploited, 
+    if the player sends 21 tokens to another address it will create an overflow because the player
     only has 20 tokens and this underflow will leave the player with 2**256 - 1 tokens completing 
     this level! */
     function transfer(address _to, uint _value) public returns (bool) {
@@ -80,13 +80,20 @@ contract Token {
 ## ⚠️ The vulnerability in detail
 
 ```yml
-The vulnerability:
+The vulnerability, uint8 underflow, the best description I have found is from the hint:
 ```
-- uint8 underflow
+
+- What is an odometer? According to my research an underflow is a lot like a odometer rolling over from 9999999 to 0000000, but that would be an overflow, in our situation the "odometer" is rolling backwards from 00000000 to 11111111 going under the amount in question an underflow.
 
 | 0 | 0 | 0 | 0| 0| 0 | 0 | 0 |
 | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+
+
+- uint8 underflow result, a *very* large number!
+
 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+
 
 ## 💥 The attack in browser developer tools console
 
