@@ -1,7 +1,15 @@
-# Introduction to Ethernaut - Level 0 - Instance
+# Instance - Level 0 - Introduction to Ethernaut - Work In Progress
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level0&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
-## 🆘 After using help() we get this instruction manual
+```yml
+How to play:
+```
+
+- how do we start playing/learning this game/lesson Ethernaut?
+
+## 🆘 After using help() we get the manual 
+
+- this manual describes some of the functions that can be used in the console of developer tools, for Ethernaut.
 
 | (index) |	Value |
 | :--: | :--: |
@@ -18,7 +26,37 @@
 | toWei(ether) |	'convert ether units to wei'	|
 | fromWei(wei) | 	'convert wei units to ether' |
 
-## Code snippets are *not* in order from smart contract see the contract files for unaltered code.
+- Got it! So let's get hacking! 
+
+## ✂️ Code Snippets and 📝 Notes
+
+```yml
+Hopefully my notes throughout are clear and easy to follow:
+```
+- code snippets will help show what section of the cmart contract we need to focus our attention to,
+
+## 🔍 While on our search for more clues
+
+```yml
+According to the instructions on the Etharnaut DApp for this level we start with:
+```
+- a JavaScript async await TODO,
+
+```JavaScript
+await contract.info()
+```
+- here is the code snippet from the contract showing this function and what it returns TODO,
+
+```Solidity
+
+  /// @notice returned from await contract.info() step 1
+  function info() public pure returns (string memory) {
+    return 'You will find what you need in info1().'; 
+  }
+```
+
+
+
 
 ```Solidity
 
