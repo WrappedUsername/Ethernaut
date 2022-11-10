@@ -1,7 +1,7 @@
 # Token challenge - Level 5 
 
 ```yml
-This smart contract has a vulnerability, it does not account for overflow and underflow leaving it vulnerable because:
+This smart contract has a vulnerability, it does not account for overflow or underflow leaving it vulnerable because:
 ```
 
 - this transfer function allows for unsafe math operations resulting in an underflow vulnerability,
@@ -80,16 +80,18 @@ contract Token {
 ## ⚠️ The vulnerability in detail
 
 ```yml
-The vulnerability, uint8 underflow, the best description I have found is from the hint:
+The vulnerability:
 ```
 
-- What is an odometer? According to my research an underflow is a lot like a odometer rolling over from 9999999 to 0000000, but that would be an overflow, in our situation the "odometer" is rolling backwards from 00000000 to 11111111 going under the amount in question an underflow.
+- I will demonstrate using uint8 underflow as an example below, and the best description I have found is from the hint,
+
+- What is an odometer? According to my research an underflow or overflow is a lot like a odometer rolling over from 9999999 to 0000000, but that would be an overflow. In our situation, an underflow would be, similar to the "odometer" rolling backwards from 00000000 to 11111111.
 
 | 0 | 0 | 0 | 0| 0| 0 | 0 | 0 |
 | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
 
 
-- uint8 underflow result, a *very* large number!
+- The result of a underflow, a *very* large number!
 
 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
