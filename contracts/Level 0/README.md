@@ -1,15 +1,15 @@
-# Instance - Level 0 - Introduction to Ethernaut - Work In Progress
+# Instance - Level 0 - Introduction to Ethernaut
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level0&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
 ```yml
 How to play:
 ```
 
-- how do we start playing/learning this game/lesson Ethernaut?
+- How do we start playing/learning this game/lesson Ethernaut?
 
 ## 🆘 After using help() we get the manual 
 
-- this manual describes some of the functions that can be used in the console of developer tools, for Ethernaut.
+- This manual describes some of the functions that can be used in the console of developer tools, for Ethernaut.
 
 | (index) |	Value |
 | :--: | :--: |
@@ -35,7 +35,7 @@ Hopefully my notes throughout are clear and easy to follow:
 ```
 - code snippets will help show what section of the smart contract we need to focus our attention to,
 
-## 🔍 While on our search for more clues
+## 🔍👀 While on our search for more clues before the 💥 attack!
 
 ```yml
 According to the instructions on the Etharnaut DApp for this level we start with step 1:
@@ -45,7 +45,7 @@ According to the instructions on the Etharnaut DApp for this level we start with
 ```JavaScript
 await contract.info()
 ```
-- here is the code snippet from the contract showing this function and what it returns,
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
 
 ```Solidity
 
@@ -59,41 +59,33 @@ await contract.info()
 On to step 2:
 ~~~
 
-- TODO
+- more [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await,
+
+```JavaScript
+await contract.info1()
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
 
 ```Solidity
-/// @notice returned from await contract.info1() step 2
+/// @notice step 2
   function info1() public pure returns (string memory) {
     return 'Try info2(), but with "hello" as a parameter.'; 
   }
 ```
 
-- TODO
+~~~yml
+On to step 3:
+~~~
 
+- more [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await, but with a parameter!
 
+```JavaScript
+await contract.info2('hello')
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
 
 ```Solidity
-
-/// @title Ethernaut introduction, and tutorial, interact with contract abi in console to beat level
-/// @author Alejandro Santander
-contract Instance {
-
-/// @notice set in memory with constructor
-  string public password;
-
-/// @notice set to false, must be true to clear instance 
-  bool private cleared = false;
-
-/// @notice returned from await contract.info() step 1
-  function info() public pure returns (string memory) {
-    return 'You will find what you need in info1().'; 
-  }
-
-/// @notice returned from await contract.info1() step 2
-  function info1() public pure returns (string memory) {
-    return 'Try info2(), but with "hello" as a parameter.'; 
-  }
-
 /// @notice returned from await contract.info2('hello') step 3, must have 'hello' as parameter
   function info2(string memory param) public pure returns (string memory) {
     if(keccak256(abi.encodePacked(param)) == keccak256(abi.encodePacked('hello'))) {  
@@ -102,27 +94,123 @@ contract Instance {
     return 'Wrong parameter.';
   }
 
+```
+
+~~~yml
+On to step 4:
+~~~
+
+- 💯 *more* 🕵️‍♂️ [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await,
+
+```JavaScript
+await contract.infoNum()
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
+
+```Solidity
 /// @notice returned from await contract.infoNum() step 4
   uint8 public infoNum = 42;
 
+```
+
+~~~yml
+On to step 5:
+~~~
+
+- more, more, mooOOAAAAR [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await, lol 😂 better get some ☕️ coffee we are only half way! lol 🤣
+
+```JavaScript
+await contract.info42()
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
+
+```Solidity
 /// @notice returned from await contract.info42() step 5
   function info42() public pure returns (string memory) {
     return 'theMethodName is the name of the next method.'; 
   }
 
+```
+
+~~~yml
+On to step 6:
+~~~
+
+- more [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await, 🥱 😴 💤 lol, jk 🤩 let's do this! Bring on more await, lol!
+
+```JavaScript
+await contract.theMethodName()
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
+
+```Solidity
 /// @notice returned from await contract.theMethodName() step 6
   string public theMethodName = 'The method name is method7123949.';
 
+```
+
+~~~yml
+On to step 7:
+~~~
+
+- 💯 🏆 💪 **MORE** 💪 🏆 🕵️‍♂️ [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await,
+
+```JavaScript
+await contract.method7123949()
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
+
+```Solidity
 /// @notice returned from await contract.method7123949() step 7
   function method7123949() public pure returns (string memory) {
     return 'If you know the password, submit it to authenticate().'; 
   }
 
+```
+
+## ✨ And here we go, what do we have here, a 🆘 vulnerability!
+
+- ethereum is transparent and public so storing vulnerable data like passwords is extremely risky ⚠️
+
+~~~yml
+On to step 8:
+~~~
+
+- 💯 *more* 🕵️‍♂️ [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) await,
+
+```JavaScript
+await contract.password()
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
+
+```Solidity
 /**  @notice password is assigned during deployment of contract in constructor,
   password found using await contract.password() returns "ethernaut0" step 8 */
   constructor(string memory _password) public {
     password = _password;
   }
+
+``` 
+- 🎉 get [rekt](https://rekt.news/), lol! 😇🤣
+
+~~~yml
+On to step 9:
+~~~
+
+## 💣💥 The attack
+
+```JavaScript
+await contract.authenticate("ethernaut0")
+
+```
+- here is the code snippet from the contract showing this function and what it returns to us, as a string of info in console,
+
+```Solidity
 
 /// @notice change bool from false to true using await contract.authenticate("ethernaut0") step 9
   function authenticate(string memory passkey) public {
@@ -131,8 +219,16 @@ contract Instance {
     }
   }
 
-/** @notice click submit instance button step 10, checks if bool cleared is true in order 
-  to clear level instance. */
+```
+
+~~~yml
+On to step 10:
+~~~
+
+- Well that was fun! 🎉 
+- Click submit instance button on the Ethernaut Instance web page, step 10, checks if bool is true in order to clear level instance.
+
+```Solidity
   function getCleared() public view returns (bool) { 
     return cleared;  
   }
