@@ -1,6 +1,23 @@
 # Introduction to Ethernaut - Level 0 - Instance
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level0&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
+## 🆘 After using help() we get this instruction manual
+
+| (index) |	Value |
+| :--: | :--: |
+| player | 'current player address' |	
+| ethernaut	| 'main game contract'	|
+| level	| 'current level contract address'	|
+| contract	| 'current level contract instance (if created)' |	
+| instance	| 'current level instance contract address (if created)'	|
+| version	| 'current game version'	|
+| getBalance(address)	| 'gets balance of address in ether'	|
+| getBlockNumber()	| 'gets current network block number'	|
+| sendTransaction({options})	| 'send transaction util'	|
+| getNetworkId()	| 'get ethereum network id'	|
+| toWei(ether) |	'convert ether units to wei'	|
+| fromWei(wei) | 	'convert wei units to ether' |
+
 ## Code snippets are *not* in order from smart contract see the contract files for unaltered code.
 
 ```Solidity
