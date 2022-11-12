@@ -1,4 +1,4 @@
-# Coin Flip Challenge - Level 3
+# Coin Flip Challenge - Level 3 🚧 Update In Progress 🏗
 
 ```yml
 This smart contract has a vulnerability, it's use of the public source of randomness makes it vulnerable because:
