@@ -3,6 +3,70 @@
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level4&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
 ```yml
+This smart contract has a vulnerability, because:
+```
+
+- TODO
+
+```Solidity
+
+```
+
+## 🆘 The victim contract in detail
+
+```yml
+The victim contract:
+```
+- TODO
+
+```Solidity
+
+```
+
+## ⚠️ The vulnerability in detail
+
+```yml
+The vulnerability:
+```
+
+- TODO
+
+```JavaScript
+
+```
+
+- TODO
+
+```Solidity
+
+```
+
+## 💥 The attack in detail
+
+```yml
+The attack:
+```
+
+- TODO
+
+```JavaScript
+
+```
+- TODO
+
+```Solidity
+
+```
+
+## 🩺 How can we fix this vulnerablity in the victim contract?
+
+- TODO
+
+```Solidity
+
+```
+
+```yml
 This smart contract has a vulnerability, it's use of tx.origin as authorization is a vulnerability because:
 ```
 - if msg.sender is not tx.origin address _owner will equal owner.
