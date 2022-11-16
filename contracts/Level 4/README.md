@@ -1,4 +1,7 @@
 # Telephone challenge - Level 4  🚧 Update In Progress 🏗
+
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Level4&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
+
 ```yml
 This smart contract has a vulnerability, it's use of tx.origin as authorization is a vulnerability because:
 ```
