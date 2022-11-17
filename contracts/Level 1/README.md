@@ -1,4 +1,4 @@
-# Fallback challenge - Level 1 🚧 Update In Progress 🏗
+# Fallback challenge - Level 1
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level1&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
 ```yml
@@ -10,7 +10,7 @@ This smart contract has a vulnerability, because:
 ```Solidity
 
 receive() external payable {
-  require(msg.value > 0 && contributions[msg.sender] > 0);
+  require(msg.value > 0 && contributions[msg.sender] > 0); // <----- critical vulnerability here!
   owner = msg.sender; 
 }
 ```
@@ -40,7 +40,7 @@ contract Fallback {
 - I am not sure why OpenZeppelin's Ownable contract is not used here,
 - I recommend using these libraries instead of implementing your own version,
   - here is why: 
-    - re-writing something that is already available is a waste of time that could introduce bugs,
+    - writing something from scratch, that is already available is a waste of time that could introduce bugs,
     
 ```yml
 I recommend using and modifying available libraries like OpenZepellin's Ownable, 
@@ -65,13 +65,15 @@ SafeMath, etc. to conform to the project's specific needs.
     }
 ```
 
-- TODO
+- most of the smart contract uses reasonable safety precautions, there are a few things in this section that stand out as vulnerabilities.
+  - The if() statement inside the contribute() function leaves the possibility for a brute force attack, an attacker might be able to recursively call this function to satisfy the if() statement to become the owner.
+  - The fallback function receive() is the critical vulnerability, the next section will describe the vulnerability in detail.
 
 ```Solidity
  function contribute() public payable {
-    require(msg.value < 0.001 ether);
+    require(msg.value < 0.001 ether); // <----- makes a brute force attack less likely, but it may still be possible
     contributions[msg.sender] += msg.value;
-    if(contributions[msg.sender] > contributions[owner]) {
+    if(contributions[msg.sender] > contributions[owner]) { // <----- possible vulnerability
       owner = msg.sender;
     }
   }
@@ -85,7 +87,7 @@ SafeMath, etc. to conform to the project's specific needs.
   }
 
   receive() external payable {
-    require(msg.value > 0 && contributions[msg.sender] > 0);
+    require(msg.value > 0 && contributions[msg.sender] > 0); // <----- critical vulnerability
     owner = msg.sender;
   }
 }
@@ -98,16 +100,17 @@ SafeMath, etc. to conform to the project's specific needs.
 ```yml
 The vulnerability:
 ```
-- TODO
+- This require statement is the crtitical vulnerability,
 
 ```Solidity
 receive() external payable {
-  require(msg.value > 0 && contributions[msg.sender] > 0);
+  require(msg.value > 0 && contributions[msg.sender] > 0); // <------ critical vulnerability
   owner = msg.sender; 
 }
 ```
 
-- TODO
+- This vulnerability underscores the importance of best practices, and shows how important it is for the blockchain developer to build the smart contract securely and test thoroughly before deploying to production/mainnet.
+- As you can see below in this code snippet, it does not take much to destroy this smart contract.
 
 ```JavaScript
 /** 
@@ -181,7 +184,9 @@ await contract.withdraw();
 
 ## 🩺 How can we fix this vulnerablity in the victim contract?
 
-- I would create more robust require statements, inside a seperate named function for receiving tokens how I prefer,
+- I would create more robust require statements, inside a seperate named function for receiving tokens designed to work how I prefer,
+- I would use all available libraries and best practices that I could.
+- I would test all modifications and functions/transactions/events for bugs before deployment to production/mainnet.
 
 ```Solidity
 
