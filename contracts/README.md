@@ -9,7 +9,7 @@
 This smart contract has a vulnerability, because:
 ```
 
-- TODO
+- *This is an example only*
 
 ```Solidity
 
@@ -20,7 +20,7 @@ This smart contract has a vulnerability, because:
 ```yml
 The victim contract:
 ```
-- TODO
+- *This is an example only*
 
 ```Solidity
 
@@ -32,13 +32,13 @@ The victim contract:
 The vulnerability:
 ```
 
-- TODO
+- *This is an example only*
 
 ```JavaScript
 
 ```
 
-- TODO
+- *This is an example only*
 
 ```Solidity
 
@@ -50,12 +50,12 @@ The vulnerability:
 The attack:
 ```
 
-- TODO
+- *This is an example only*
 
 ```JavaScript
 
 ```
-- TODO
+- *This is an example only*
 
 ```Solidity
 
@@ -63,7 +63,7 @@ The attack:
 
 ## 🩺 How can we fix this vulnerablity in the victim contract?
 
-- TODO
+- *This is an example only*
 
 ```Solidity
 
