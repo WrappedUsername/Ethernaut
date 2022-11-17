@@ -18,9 +18,13 @@ receive() external payable {
 ## 🆘 The victim contract in detail
 
 ```yml
-The victim contract imports OpenZeppelin's safeMath here:
+The victim contract imports OpenZeppelin's SafeMath contract here:
 ```
-- TODO
+- There is nothing much going on here, I personally would use a fixed pragma, but that is a much smaller detail,
+- I would like to focus on the main purpose of the contract as a whole, a white paper is something smart contract developers should make a habit of creating during the intial build phase. The white paper gives everyone that high level view of the project and the intentions of the smart contract.
+- We also have to take into account any other smart contracts or interfaces that this smart contract in question uses within it's sphere of influence.
+- As for this smart contract, and probably most others too, there is no white paper so we must make an educated guess about the intentions of the contract from the information that we can find, 
+- of coarse this smart contract is intended to be used as an example in a tutorial/challenge, so this explains why there are such obvious and critical vulnerabilities in the smart contract. 
 
 ```Solidity
 // SPDX-License-Identifier: MIT
@@ -33,7 +37,15 @@ contract Fallback {
   using SafeMath for uint256;
 ```
 
-- TODO
+- I am not sure why OpenZeppelin's Ownable contract is not used here,
+- I recommend using these libraries instead of implementing your own version,
+  - here is why: 
+    - re-writing something that is already available is a waste of time that could introduce bugs,
+    
+```yml
+I recommend using and modifying available libraries like OpenZepellin's Ownable, 
+SafeMath, etc. to conform to the project's specific needs.
+```
 
 ```Solidity
   mapping(address => uint) public contributions;
