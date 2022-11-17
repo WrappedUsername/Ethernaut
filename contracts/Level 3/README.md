@@ -1,4 +1,4 @@
-# Coin Flip Challenge - Level 3 🚧 Update In Progress 🏗
+# Coin Flip Challenge - Level 3
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level3&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
@@ -27,9 +27,47 @@ bool side = coinFlip == 1 ? true : false;
 ```yml
 The victim contract:
 ```
-- TODO
+- FACTOR is part of the vulnerability because it is used to help determine the source of randomness and,
+  - it is publicly available,
 
 ```Solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract CoinFlip {
+
+  uint256 public consecutiveWins;
+  uint256 lastHash;
+  uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968; // <---- used in attack!
+
+  constructor() {
+    consecutiveWins = 0;
+  }
+```
+
+- the other vulnerabilities are found in this section of the victim contract,
+
+```Solidity
+function flip(bool _guess) public returns (bool) {
+    uint256 blockValue = uint256(blockhash(block.number - 1)); // <----- NOT random at all, used in attack!
+
+    if (lastHash == blockValue) {
+      revert();
+    }
+
+    lastHash = blockValue;
+    uint256 coinFlip = blockValue / FACTOR; // <----- used in attack!
+    bool side = coinFlip == 1 ? true : false; // <----- used in attack!
+
+    if (side == _guess) {
+      consecutiveWins++;
+      return true;
+    } else {
+      consecutiveWins = 0;
+      return false;
+    }
+  }
+}
 
 ```
 
@@ -39,16 +77,13 @@ The victim contract:
 The vulnerability:
 ```
 
-- TODO
-
-```JavaScript
-
-```
-
-- TODO
+- [Globally Available Variables](https://docs.soliditylang.org/en/v0.8.17/units-and-global-variables.html?highlight=global%20variables#special-variables-and-functions) *SHOULD NOT* be used as a source of randomness, because they,
+  - always exist in the global namespace because they are,
+    - mainly used to provide information about the blockchain and,
+    - are general-use utility functions.
 
 ```Solidity
-
+  uint256 blockValue = uint256(blockhash(block.number - 1)); // <----- NOT random at all!
 ```
 
 ## 💥 The attack contract in detail:
@@ -163,11 +198,11 @@ Fire away at that flip button, ten times:
 
 - Use a decentralized oracle network for the source of randomness.
 
-```Solidity
-
+```yml
+Like this:
 ```
 
-
+- [verifiable source of randomness for smart contract developers](https://chain.link/vrf)
 
 
 
