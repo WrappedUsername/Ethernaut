@@ -136,6 +136,24 @@ Click hackContract button to initiate the attack:
 - If your wallet checks msg.sender for authorization, it will get the address of the attacking wallet, instead of the owner address from tx.origin,
 
 ```Solidity
- require(msg.sender == owner); // <----- do not use tx.origin for authorization
+function changeOwner(address _newOwner) public { 
+  require(msg.sender == owner); // <----- access control, with require() statement 
+  owner = _newOwner;
+}
 ```
+
+- we can also use access control with OpenZeppelin's Ownable contract,
+
+```Solidity
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+
+function changeOwner(address _newOwner) public onlyOwner { // <----- access control, with onlyOwner
+  require(msg.sender == owner) // <------ access control, with require() statement
+  owner = _newOwner;
+}
+
+```
+
+
+
 
