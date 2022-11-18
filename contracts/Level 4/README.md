@@ -177,7 +177,7 @@ contract Telephone is Ownable {
 
 
 ```yml
-Ownable also lets you:
+Ownable lets you:
 ```
 
 - transferOwnership from the owner account to a new one, and
