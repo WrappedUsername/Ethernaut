@@ -17,7 +17,7 @@ This smart contract has a vulnerability, because:
 * address that started the original transaction, that created this contract. 
 */
 function changeOwner(address _owner) public {
-  if (tx.origin != msg.sender) { // <----- tx.origin for authorization
+  if (tx.origin != msg.sender) { // <----- tx.origin for authorization, and the if() will never revert if false
     owner = _owner;
   }
 }
@@ -133,23 +133,72 @@ Click hackContract button to initiate the attack:
 
 ## 🩺 How can we fix this vulnerablity in the victim contract?
 
-- If your require() statement checks msg.sender for authorization, it will get the address of the attacking wallet, instead of the owner's address from tx.origin,
+- we can use a require() statement for access control because,
+- the require() statement will check msg.sender for authorization, but it will get the address of the attacking wallet, instead of the owner's address from tx.origin, so the transaction will automatically revert.
 
 ```Solidity
-function changeOwner(address _newOwner) public { 
-  require(msg.sender == owner); // <----- access control, with require() statement 
-  owner = _newOwner;
+function changeOwner(address _owner) public {
+  require(msg.sender == owner) { // <------ will revert transaction if false
+  owner = _owner;
+}
+```
+
+- ⚠️ Caution! Using an if() statement will accomplish the same thing as the require statement, but the if() statement will not automatically revert, you will need to use an if...else statement and manually revert the transaction 
+
+```Solidity
+function changeOwner(address newOwner) public {
+  if (msg.sender == owner) {
+    owner = newOwner;
+  } else {
+    revert("you are not the owner!") // <----- do not forget to revert the transaction!
+  }
 }
 ```
 
 - we can also use access control with [OpenZeppelin's Ownable contract](https://docs.openzeppelin.com/contracts/4.x/access-control),
+- this is all we need we have all of the same functionality of the victim contract without any of the vulnerabilities.
 
 ```Solidity
+// SPDX-License-Identifier: MIT
+
+pragma solidity 0.8.7;
+
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-function changeOwner(address _newOwner) public onlyOwner { // <----- access control, with onlyOwner
-  require(msg.sender == owner) // <------ access control, with require() statement
-  owner = _newOwner;
+contract Telephone is Ownable {
+  constructor()  {}
+}
+
+```
+
+- in this image below I tried to change the owner of the contract but it reverted because of the access control from OpenZeppelin's Ownable contract.
+
+![Screen Shot 2022-11-18 at 11 11 09 AM](https://user-images.githubusercontent.com/104662990/202762381-32fbb568-1f4a-4ee5-95ba-58ac9d27443c.png)
+
+
+```yml
+Ownable also lets you:
+```
+
+- transferOwnership from the owner account to a new one, and
+
+- renounceOwnership for the owner to relinquish this administrative privilege, a common pattern after an initial stage with centralized administration is over.
+
+```yml
+```
+
+- In the code snippet below, is this too much security? 
+- Maybe, the more code you write, the more attack surface may potentially be hidden, but present, because of one small error in your code.
+
+```Solidity
+
+function changeOwner(address newOwner) public {
+  if (msg.sender == owner) {
+    require(msg.sender == owner);
+    owner = newOwner;
+  } else {
+    revert("you are not the owner!"); // <----- do not forget to revert the transaction!
+  }
 }
 
 ```
