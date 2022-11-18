@@ -2,14 +2,25 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level4&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
+
 ```yml
 This smart contract has a vulnerability, because:
 ```
 
-- TODO
+- by checking tx.origin, it gets the original address that kicked off the transaction, which is still the owner address.
+  - so passing the if() statement is extremely easy to become the new owner!
 
 ```Solidity
-
+/** 
+* @notice function changeOwner() uses tx.origin to change ownership 
+* to the address that calls this function, just as long as it is not the 
+* address that started the original transaction, that created this contract. 
+*/
+function changeOwner(address _owner) public {
+  if (tx.origin != msg.sender) { // <----- tx.origin for authorization
+    owner = _owner;
+  }
+}
 ```
 
 ## 🆘 The victim contract in detail
@@ -39,49 +50,6 @@ The vulnerability:
 
 ```Solidity
 
-```
-
-## 💥 The attack in detail
-
-```yml
-The attack:
-```
-
-- TODO
-
-```JavaScript
-
-```
-- TODO
-
-```Solidity
-
-```
-
-## 🩺 How can we fix this vulnerablity in the victim contract?
-
-- TODO
-
-```Solidity
-
-```
-
-```yml
-This smart contract has a vulnerability, it's use of tx.origin as authorization is a vulnerability because:
-```
-- if msg.sender is not tx.origin address _owner will equal owner.
-
-```Solidity
-/** 
-* @notice function changeOwner() uses tx.origin to change ownership 
-* to whatever address calls this function just as long as it is not the 
-* address that started the original transaction that created this contract 
-*/
-function changeOwner(address _owner) public {
-  if (tx.origin != msg.sender) {
-    owner = _owner;
-  }
-}
 ```
 
 ## 💥 The attack contract in detail
@@ -134,6 +102,23 @@ function changeOwner(address _owner) public {
 }
 ```
 
+## 💥 The attack in detail
+
+```yml
+The attack:
+```
+
+- TODO
+
+```JavaScript
+
+```
+- TODO
+
+```Solidity
+
+```
+
 ## 💥 The attack contract locked and loaded in REMIX IDE
 
 ```yml
@@ -145,3 +130,12 @@ Click hackContract button to initiate the attack:
 <p align="left" >
 <img width="512" height="512" src="https://user-images.githubusercontent.com/104662990/199756044-16a699f2-5111-4dfe-a25f-fac81cd4b1ab.png">
 </P>
+
+## 🩺 How can we fix this vulnerablity in the victim contract?
+
+- If your wallet checks msg.sender for authorization, it will get the address of the attacking wallet, instead of the owner address from tx.origin,
+
+```Solidity
+ require(msg.sender == owner); // <----- do not use tx.origin for authorization
+```
+
