@@ -133,7 +133,7 @@ Click hackContract button to initiate the attack:
 
 ## 🩺 How can we fix this vulnerablity in the victim contract?
 
-- If your wallet checks msg.sender for authorization, it will get the address of the attacking wallet, instead of the owner address from tx.origin,
+- If your require() statement checks msg.sender for authorization, it will get the address of the attacking wallet, instead of the owner's address from tx.origin,
 
 ```Solidity
 function changeOwner(address _newOwner) public { 
@@ -142,10 +142,10 @@ function changeOwner(address _newOwner) public {
 }
 ```
 
-- we can also use access control with OpenZeppelin's Ownable contract,
+- we can also use access control with [OpenZeppelin's Ownable contract](https://docs.openzeppelin.com/contracts/4.x/access-control),
 
 ```Solidity
-import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 function changeOwner(address _newOwner) public onlyOwner { // <----- access control, with onlyOwner
   require(msg.sender == owner) // <------ access control, with require() statement
