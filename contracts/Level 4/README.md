@@ -1,4 +1,4 @@
-# Telephone challenge - Level 4  🚧 Update In Progress 🏗
+# Telephone challenge - Level 4
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Level4&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
 
@@ -11,11 +11,7 @@ This smart contract has a vulnerability, because:
   - so passing the if() statement is extremely easy to become the new owner!
 
 ```Solidity
-/** 
-* @notice function changeOwner() uses tx.origin to change ownership 
-* to the address that calls this function, just as long as it is not the 
-* address that started the original transaction, that created this contract. 
-*/
+
 function changeOwner(address _owner) public {
   if (tx.origin != msg.sender) { // <----- tx.origin for authorization, and the if() will never revert if false
     owner = _owner;
@@ -28,10 +24,26 @@ function changeOwner(address _owner) public {
 ```yml
 The victim contract:
 ```
-- TODO
+- There is not much here, meaning it could use OpenZeppelin's Ownable contract,
 
 ```Solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
+contract Telephone {
+
+  address public owner;
+
+  constructor() {
+    owner = msg.sender;
+  }
+
+  function changeOwner(address _owner) public {
+    if (tx.origin != msg.sender) {
+      owner = _owner;
+    }
+  }
+}
 ```
 
 ## ⚠️ The vulnerability in detail
@@ -40,16 +52,13 @@ The victim contract:
 The vulnerability:
 ```
 
-- TODO
-
-```JavaScript
-
-```
-
-- TODO
+- There are no access controls in place, to safe-guard access to this function,
 
 ```Solidity
-
+ function changeOwner(address _owner) public {
+    if (tx.origin != msg.sender) {
+      owner = _owner;
+    }
 ```
 
 ## 💥 The attack contract in detail
@@ -61,30 +70,40 @@ The attack contract starts with importing the victim contract:
 
 ```Solidity
 // SPDX-License-Identifier: MIT
-// fixed pragma
 pragma solidity 0.6.0;
 
 import "./Telephone.sol";
 
-/// @title attack contract, assumes ownership
-/// @author Web3 Blockchain Developer
 contract TelephoneHack {
 ```
 
 - the constructor receives the victim contract address from the player and references the victim contract with Telephone(_address), this address is assigned as the state variable telContract,
 
 ```Solidity
-/// @notice state variable assigned in constructor
+
 Telephone telContract;
 
-/** 
-* @notice victim address belonging to Telephone contract assigned as
-* state variable telContract during deployment of attack contract 
-*/
     constructor(address _address) public {
         telContract = Telephone(_address);
     }
 ```
+- This function lacks proper access controls,
+
+```Solidity
+
+function changeOwner(address _owner) public {
+  if (tx.origin != msg.sender) {
+    owner = _owner;
+  }
+}
+```
+
+## 💥 The attack in detail
+
+```yml
+The attack:
+```
+
 - finally the attack begins,
 - if msg.sender is not tx.origin address _owner will equal owner,
   - the player calls the changeOwner function to assume ownership and win.
@@ -100,23 +119,6 @@ function changeOwner(address _owner) public {
     owner = _owner;
   }
 }
-```
-
-## 💥 The attack in detail
-
-```yml
-The attack:
-```
-
-- TODO
-
-```JavaScript
-
-```
-- TODO
-
-```Solidity
-
 ```
 
 ## 💥 The attack contract locked and loaded in REMIX IDE
