@@ -1,5 +1,7 @@
 # Do you need a Solidity certification, to become a solidity developer (2023)? Is Solidity hard to learn?
 
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Level0&label=Repository%20views&color=0e75b6&style=flat" alt="wrappedusername" /> </p>
+
 You do not need any certification to become an ethereum blockchain developer. There are no smart contract development certification requirements when applying for ethereum blockchain developer jobs. Solidity courses are not regulated and nothing is required to start developing smart contracts to help you get a good blockchain developer job. 
 
 If you decide to become a blockchain developer and you decide to purchase a paid Solidity course to learn how to create Solidity smart contracts, congratulations! This is the very best time to learn blockchain development to become a Solidity coder using cutting edge blockchain technology to deploy smart contracts, because Solidity programmers, Solidity engineers, and blockchain technology is still in high demand and I see this demand for Solidity developers that can use Solidity and smart contracts on the ethereum virtual machine to build a decentralized future for the ethereum blockchain, for years to come.
